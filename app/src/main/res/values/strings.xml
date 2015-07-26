@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Refrigerium</string>
+    <string name="action_settings">Settings</string>
+    <string name="add_food_item_name">Add Food Item</string>
+    <string name="title_activity_add_food_item">Add Food Item</string>
+    <string name="food_item_name_field">Name</string>
+    <string name="expiration_date">Expiration Date</string>
+    <string name="date_format_m_d_y">(Month/Day/Year)</string>
+    <string name="date_format_d_m_y">(Day/Month/Year)</string>
+    <string name="date_format_y_m_d">(Year/Month/Day)</string>
+    <string name="new_food_item_submit_button">Ok</string>
+</resources>
