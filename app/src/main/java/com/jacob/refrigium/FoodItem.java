@@ -7,22 +7,34 @@ import java.util.Date;
  */
 
 public class FoodItem {
-    private int icon;
+    private int id;
+    private String foodType;
     private String name;
-    private Date expirationDate;
+    private String expirationDate;
 
-    public FoodItem(int icon, String name, Date expirationDate) {
-        this.icon = icon;
+    public FoodItem () {}
+
+    public FoodItem(int id, String foodType, String name, String expirationDate) {
+        this.id = id;
+        this.foodType = foodType;
         this.name = name;
         this.expirationDate = expirationDate;
     }
 
-    public int getIcon() {
-        return icon;
+    public int getId() {
+        return id;
     }
 
-    public void setIcon(int icon) {
-        this.icon = icon;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getFoodType() {
+        return foodType;
+    }
+
+    public void setFoodType(String foodType) {
+        this.foodType = foodType;
     }
 
     public String getName() {
@@ -33,11 +45,11 @@ public class FoodItem {
         this.name = name;
     }
 
-    public Date getExpirationDate() {
+    public String getExpirationDate() {
         return expirationDate;
     }
 
-    public void setExpirationDate(Date expirationDate) {
+    public void setExpirationDate(String expirationDate) {
         this.expirationDate = expirationDate;
     }
 }

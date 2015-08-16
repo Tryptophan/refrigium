@@ -9,7 +9,29 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import java.io.InputStream;
+import java.io.Reader;
+import java.math.BigDecimal;
+import java.net.URL;
+import java.sql.Array;
+import java.sql.Blob;
+import java.sql.Clob;
+import java.sql.Connection;
+import java.sql.NClob;
+import java.sql.ParameterMetaData;
+import java.sql.PreparedStatement;
+import java.sql.Ref;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.RowId;
+import java.sql.SQLException;
+import java.sql.SQLWarning;
+import java.sql.SQLXML;
+import java.sql.Time;
+import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -23,25 +45,32 @@ public class AddFoodItemActivity extends ActionBarActivity {
 
         // Instantiate views from activity layout
         Button addFoodItemSubmitButton = (Button)findViewById(R.id.addFoodItemSubmitButton);
+        // TODO: add carousel for food type options
 
-        // TODO: add carousel for food icon options
-        final String foodItemName = ((EditText)findViewById(R.id.foodItemNameField)).toString();
-        final String foodItemExpirationDate = ((EditText)findViewById(R.id.foodItemExpirationDateField)).toString();
-
+        // TODO: Expiration hint printing sequence of numbers (id?)
         // Set hint for expiration date format dynamically based on settings
         EditText foodItemExpirationDateField = (EditText)findViewById(R.id.foodItemExpirationDateField);
-        foodItemExpirationDateField.setHint(R.string.expiration_date + getDateFormat());
+        foodItemExpirationDateField.setHint("Expiration Date " + getDateFormat());
 
         // Instantiate onClickListener for addFoodItemSubmitButton
         addFoodItemSubmitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                // Read user input for food item params
+                // TODO: add food item type to form
+                String foodType = "vegetable";
+                String name = ((EditText)findViewById(R.id.foodItemNameField)).toString();
+                String expirationDate = ((EditText)findViewById(R.id.foodItemExpirationDateField)).toString();
+
+                // Set new id using size of table
+                DatabaseHandler db = new DatabaseHandler(view.getContext());
                 // Insert values into SQLite Database
-                SQLiteDatabase db = openOrCreateDatabase("FoodItemDB", MODE_PRIVATE, null);
-                db.execSQL("INSERT INTO FoodItems VALUES(" + foodItemName + "VARCHAR" + foodItemExpirationDate + "VARCHAR" + ")");
+                db.addFoodItem(new FoodItem(db.getFoodItems().size(), foodType, name, expirationDate));
                 db.close();
 
-                Date expirationDate = stringtoDate(foodItemExpirationDate, "/");
+                // TOOD: Set conditions for saving and notify user if success or error
+                Toast.makeText(AddFoodItemActivity.this, "Saved successfully!", Toast.LENGTH_SHORT).show();
 
                 // Set notificationTask timer
                 // TODO: add notificationTask that triggers before expirationDate
