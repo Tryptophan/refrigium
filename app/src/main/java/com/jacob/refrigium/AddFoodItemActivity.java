@@ -4,34 +4,13 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.text.Editable;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import java.io.InputStream;
-import java.io.Reader;
-import java.math.BigDecimal;
-import java.net.URL;
-import java.sql.Array;
-import java.sql.Blob;
-import java.sql.Clob;
-import java.sql.Connection;
-import java.sql.NClob;
-import java.sql.ParameterMetaData;
-import java.sql.PreparedStatement;
-import java.sql.Ref;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.RowId;
-import java.sql.SQLException;
-import java.sql.SQLWarning;
-import java.sql.SQLXML;
-import java.sql.Time;
-import java.sql.Timestamp;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -60,8 +39,11 @@ public class AddFoodItemActivity extends ActionBarActivity {
                 // Read user input for food item params
                 // TODO: add food item type to form
                 String foodType = "vegetable";
-                String name = ((EditText)findViewById(R.id.foodItemNameField)).toString();
-                String expirationDate = ((EditText)findViewById(R.id.foodItemExpirationDateField)).toString();
+                EditText foodItemNameField = (EditText)(findViewById(R.id.foodItemNameField));
+                EditText foodItemExpirationDateField = (EditText)(findViewById(R.id.foodItemExpirationDateField));
+
+                String name = foodItemNameField.getText().toString();
+                String expirationDate = foodItemExpirationDateField.getText().toString();
 
                 // Set new id using size of table
                 DatabaseHandler db = new DatabaseHandler(view.getContext());

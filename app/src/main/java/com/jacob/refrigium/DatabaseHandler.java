@@ -92,6 +92,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 foodItem.setFoodType(cursor.getString(1));
                 foodItem.setName(cursor.getString(2));
                 foodItem.setExpirationDate(cursor.getString(3));
+                foodItemList.add(foodItem);
             } while (cursor.moveToNext());
         }
         return foodItemList;

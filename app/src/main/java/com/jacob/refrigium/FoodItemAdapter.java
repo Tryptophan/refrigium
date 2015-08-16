@@ -27,7 +27,6 @@ public class FoodItemAdapter extends ArrayAdapter<FoodItem> {
 
         // Set TextViews for list items from db
         String foodItemName = getItem(position).getName();
-
         TextView foodItemNameTextView = (TextView)view.findViewById(R.id.foodItemNameTextView);
         foodItemNameTextView.setText(foodItemName);
 
