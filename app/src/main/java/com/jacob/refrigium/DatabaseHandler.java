@@ -111,9 +111,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         List<FoodItem> foodItems = getFoodItems();
         List<FoodItem> newFoodItems = new ArrayList<>();
         for (int i = 0; i < foodItems.size(); i++) {
-            if (foodItems.get(i).getName().equals(query) ||
+            if (foodItems.get(i).getFoodType().equalsIgnoreCase(query) ||
                     foodItems.get(i).getExpirationDate().equals(query) ||
-                    foodItems.get(i).getFoodType().equals(query)) {
+                    foodItems.get(i).getName().equalsIgnoreCase(query)) {
                 newFoodItems.add(foodItems.get(i));
             }
         }

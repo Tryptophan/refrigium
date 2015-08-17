@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -53,7 +54,12 @@ public class MainActivity extends ActionBarActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
-        return super.onCreateOptionsMenu(menu);
+        // Get the SearchView and set the searchable configuration
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+
+        return true;
     }
 
     @Override
@@ -72,34 +78,6 @@ public class MainActivity extends ActionBarActivity {
         //noinspection SimplifiableIfStatement
         if (item.getItemId() == R.id.action_settings) {
             return true;
-        }
-
-        if (item.getItemId() == R.id.action_search) {
-            SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-            final SearchView searchView = (SearchView) findViewById(R.id.action_search);
-
-            if (searchView != null) {
-                searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-                searchView.setIconifiedByDefault(false);
-            }
-
-            SearchView.OnQueryTextListener queryTextListener = new SearchView.OnQueryTextListener() {
-                public boolean onQueryTextChange(String newText) {
-                    // this is your adapter that will be filtered
-                    return true;
-                }
-
-                public boolean onQueryTextSubmit(String query) {
-                    Intent intent = new Intent(searchView.getContext(), SearchResultsActivity.class);
-                    intent.putExtra("searchQuery", query);
-                    startActivity(intent);
-                    return true;
-                }
-            };
-
-            if (searchView != null) {
-                searchView.setOnQueryTextListener(queryTextListener);
-            }
         }
 
         return super.onOptionsItemSelected(item);

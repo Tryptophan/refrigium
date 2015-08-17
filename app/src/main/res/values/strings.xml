@@ -12,4 +12,6 @@
     <string name="title_activity_search_results">Refrigium</string>
     <string name="food_item_results_view">Food Results</string>
     <string name="recipe_results_view">Recipe Results</string>
+    <string name="search_hint">Search</string>
+    <string name="title_activity_searchable">Search Results</string>
 </resources>
