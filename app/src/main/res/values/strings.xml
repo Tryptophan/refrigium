@@ -8,4 +8,8 @@
     <string name="date_format_d_m_y">(Day/Month/Year)</string>
     <string name="date_format_y_m_d">(Year/Month/Day)</string>
     <string name="new_food_item_submit_button">Ok</string>
+    <string name="action_search">Search</string>
+    <string name="title_activity_search_results">Refrigium</string>
+    <string name="food_item_results_view">Food Results</string>
+    <string name="recipe_results_view">Recipe Results</string>
 </resources>

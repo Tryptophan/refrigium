@@ -19,6 +19,7 @@
         <activity
             android:name=".AddFoodItemActivity"
             android:label="@string/title_activity_add_food_item"
+            android:launchMode="singleTop"
             android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -27,6 +28,14 @@
         <activity
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings" >
+        </activity>
+        <activity
+            android:name=".SearchResultsActivity"
+            android:label="@string/title_activity_search_results"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.jacob.refrigium.MainActivity" />
         </activity>
     </application>
 

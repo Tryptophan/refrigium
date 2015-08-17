@@ -1,24 +1,18 @@
 package com.jacob.refrigium;
 
+import android.app.Activity;
+import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
+import android.support.v7.widget.SearchView;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -59,7 +53,7 @@ public class MainActivity extends ActionBarActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
@@ -78,6 +72,34 @@ public class MainActivity extends ActionBarActivity {
         //noinspection SimplifiableIfStatement
         if (item.getItemId() == R.id.action_settings) {
             return true;
+        }
+
+        if (item.getItemId() == R.id.action_search) {
+            SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+            final SearchView searchView = (SearchView) findViewById(R.id.action_search);
+
+            if (searchView != null) {
+                searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+                searchView.setIconifiedByDefault(false);
+            }
+
+            SearchView.OnQueryTextListener queryTextListener = new SearchView.OnQueryTextListener() {
+                public boolean onQueryTextChange(String newText) {
+                    // this is your adapter that will be filtered
+                    return true;
+                }
+
+                public boolean onQueryTextSubmit(String query) {
+                    Intent intent = new Intent(searchView.getContext(), SearchResultsActivity.class);
+                    intent.putExtra("searchQuery", query);
+                    startActivity(intent);
+                    return true;
+                }
+            };
+
+            if (searchView != null) {
+                searchView.setOnQueryTextListener(queryTextListener);
+            }
         }
 
         return super.onOptionsItemSelected(item);

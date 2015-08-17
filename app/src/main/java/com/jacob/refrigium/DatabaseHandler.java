@@ -107,6 +107,20 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return cursor.getCount();
     }
 
+    public List<FoodItem> search(String query) {
+        List<FoodItem> foodItems = getFoodItems();
+        List<FoodItem> newFoodItems = new ArrayList<>();
+        for (int i = 0; i < foodItems.size(); i++) {
+            if (foodItems.get(i).getName().equals(query) ||
+                    foodItems.get(i).getExpirationDate().equals(query) ||
+                    foodItems.get(i).getFoodType().equals(query)) {
+                newFoodItems.add(foodItems.get(i));
+            }
+        }
+
+        return newFoodItems;
+    }
+
     public int updateFoodItem(FoodItem foodItem) {
         SQLiteDatabase db = this.getWritableDatabase();
 

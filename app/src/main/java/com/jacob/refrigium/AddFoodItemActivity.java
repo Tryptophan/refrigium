@@ -90,6 +90,8 @@ public class AddFoodItemActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    // TODO: Change user input to Date
     public Date stringtoDate(String s, String delimiter) {
         // Loop through the expiration date and convert to date
         Scanner dateScanner = new Scanner(s);

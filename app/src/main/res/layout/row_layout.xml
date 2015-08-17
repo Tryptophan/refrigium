@@ -8,28 +8,32 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp">
 
         <ImageView
-            android:layout_height="48dp"
-            android:layout_width="48dp"
+            android:layout_height="36dp"
+            android:layout_width="36dp"
+            android:layout_marginRight="16dp"
             android:id="@+id/foodItemTypeImageView"/>
 
         <LinearLayout
-            android:layout_height="fill_parent"
+            android:layout_height="wrap_content"
             android:layout_width="fill_parent"
             android:orientation="vertical">
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/foodItemNameTextView"
-                android:textSize="18sp"/>
+                android:textSize="22sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/foodItemExpirationDateTextView"
-                android:textSize="10sp"/>
+                android:textSize="14sp"/>
         </LinearLayout>
     </LinearLayout>
 
