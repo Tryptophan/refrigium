@@ -10,18 +10,39 @@
     <TextView
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:id="@+id/foodItemResultsTextView"
-        android:text="@string/food_item_results_view"/>
+        android:id="@+id/noResultsTextView"
+        android:text="@string/no_results"/>
 
-    <ListView
-        android:layout_width="fill_parent"
+    <ScrollView
         android:layout_height="fill_parent"
-        android:id="@+id/foodItemResultsListView"/>
+        android:layout_width="fill_parent">
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:orientation="vertical">
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:id="@+id/foodItemResultsTextView"
+                android:text="@string/food_item_results_view"/>
 
-    <TextView
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:id="@+id/recipeResultsTextView"
-        android:text="@string/recipe_results_view"/>
+            <ListView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/foodItemResultsListView"/>
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:id="@+id/recipeResultsTextView"
+                android:text="@string/recipe_results_view"/>
+
+            <ListView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/recipeResultsListView"/>
+        </LinearLayout>
+
+    </ScrollView>
 
 </LinearLayout>

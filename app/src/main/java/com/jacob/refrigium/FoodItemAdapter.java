@@ -1,12 +1,10 @@
 package com.jacob.refrigium;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
@@ -14,13 +12,13 @@ import android.widget.TextView;
  */
 public class FoodItemAdapter extends ArrayAdapter<FoodItem> {
     public FoodItemAdapter(Context context, FoodItem[] values) {
-        super(context, R.layout.row_layout, values);
+        super(context, R.layout.food_item_row_layout, values);
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = LayoutInflater.from(getContext());
-        View view = inflater.inflate(R.layout.row_layout, parent, false);
+        View view = inflater.inflate(R.layout.food_item_row_layout, parent, false);
 
         // TODO: Setep icons for different images
         //String foodItemTypeImageView = getItem(position).getFoodType();

@@ -6,8 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 public class SearchableActivity extends AppCompatActivity {
 
@@ -16,21 +18,42 @@ public class SearchableActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_searchable);
 
+        // Hide/show textviews based on query size
+        TextView noResults = (TextView)findViewById(R.id.noResultsTextView);
+        TextView foodResults = (TextView)findViewById(R.id.foodItemResultsTextView);
+        TextView recipeResults = (TextView)findViewById(R.id.recipeResultsTextView);
+        noResults.setVisibility(View.GONE);
+
+        // Instantiate arrays for food and recipe results
         ListView foodItemResultsListView = (ListView)findViewById(R.id.foodItemResultsListView);
         FoodItem[] foodItems = {};
+
+        ListView recipeResultsListView = (ListView)findViewById(R.id.recipeResultsListView);
+        Recipe[] recipes = {};
 
         // Get the intent, verify the action and get the query
         Intent intent = getIntent();
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+            // Read the query and search arrays
             String query = intent.getStringExtra(SearchManager.QUERY);
-            DatabaseHandler db = new DatabaseHandler(this);
-            foodItems = db.search(query).toArray(new FoodItem[db.search(query).size()]);
-            db.close();
+            DatabaseHandler foodDb = new DatabaseHandler(this);
+            foodItems = foodDb.search(query).toArray(new FoodItem[foodDb.search(query).size()]);
+
+            // TODO: add recipe db handler
+
+            if (foodItems.length == 0 && recipes.length == 0) {
+                noResults.setVisibility(View.VISIBLE);
+                foodResults.setVisibility(View.GONE);
+                recipeResults.setVisibility(View.VISIBLE);
+            }
+            foodDb.close();
         }
 
         // Insert the List into the ListView
         ListAdapter foodItemsAdapter = new FoodItemAdapter(this, foodItems);
         foodItemResultsListView.setAdapter(foodItemsAdapter);
+
+        // TODO: use query to read recipe database
     }
 
     @Override

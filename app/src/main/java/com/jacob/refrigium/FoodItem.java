@@ -7,6 +7,7 @@ import java.util.Date;
  */
 
 public class FoodItem {
+    // TODO: add count to FoodItem
     private int id;
     private String foodType;
     private String name;

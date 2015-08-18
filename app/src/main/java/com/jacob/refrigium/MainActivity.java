@@ -1,21 +1,22 @@
 package com.jacob.refrigium;
 
-import android.app.Activity;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.support.v7.widget.SearchView;
 
 public class MainActivity extends ActionBarActivity {
+
+    private EditDelete editDelete = new EditDelete();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +38,7 @@ public class MainActivity extends ActionBarActivity {
         db.close();
 
         // Insert the List into the ListView
-        ListAdapter foodItemsAdapter = new FoodItemAdapter(this, foodItems);
+        final ListAdapter foodItemsAdapter = new FoodItemAdapter(this, foodItems);
         foodItemListView.setAdapter(foodItemsAdapter);
 
         // Instantiate the OnClickListener for addFoodItemButton
@@ -46,6 +47,20 @@ public class MainActivity extends ActionBarActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), AddFoodItemActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        // Instantiate OnClickLister for edit/delete tools for foodItems
+        foodItemListView.setOnItemLongClickListener (new AdapterView.OnItemLongClickListener() {
+            public boolean onItemLongClick(AdapterView parent, View view, int position, long id) {
+                if (editDelete.isEditDelete()) {
+                    editDelete.setIsEditDelete(false);
+                }
+                else {
+                    editDelete.setPosition(position);
+                    editDelete.setIsEditDelete(true);
+                }
+                return true;
             }
         });
     }
@@ -62,7 +77,18 @@ public class MainActivity extends ActionBarActivity {
         return true;
     }
 
-    @Override
+    public boolean onPrepareOptionsMenu (Menu menu) {
+        menu.clear();
+        if (editDelete.isEditDelete()) {
+            getMenuInflater().inflate(R.menu.edit_delete_menu, menu);
+        }
+        else {
+            getMenuInflater().inflate(R.menu.menu_main, menu);
+        }
+        return super.onPrepareOptionsMenu(menu);
+    }
+
+        @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
